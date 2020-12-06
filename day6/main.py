@@ -4,16 +4,16 @@
 def get_content(name):
     with open(name, 'r') as file:
         content = file.read().strip().split('\n\n')
-        content = [el.split('\n') for el in content]
-        return [[list(el) for el in group] for group in content]
+        return [[set(el) for el in group.split('\n')]
+                for group in content]
 
 
 def get_unique_answers(content):
-    return [set(group[0]).union(*group) for group in content]
+    return [set.union(*group) for group in content]
 
 
 def get_common_answers(content):
-    return [set(group[0]).intersection(*group) for group in content]
+    return [set.intersection(*group) for group in content]
 
 
 def get_sublist_length(content):
@@ -27,4 +27,3 @@ if __name__ == '__main__':
 
     results = sum(get_sublist_length(get_common_answers(file_content)))
     print(f'problem 2 - the solution is: {results}')
-
