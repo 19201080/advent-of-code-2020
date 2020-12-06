@@ -16,9 +16,9 @@ def string_to_binary(boarding_pass):
 
 
 def decode_boarding_pass(passes):
-    result = [string_to_binary(boarding_pass) for boarding_pass in passes]
+    as_binary = [string_to_binary(boarding_pass) for boarding_pass in passes]
     return [[int(boarding_pass[:7], 2), int(boarding_pass[-3:], 2)]
-            for boarding_pass in result]
+            for boarding_pass in as_binary]
 
 
 def get_seat_id(passes):
@@ -26,15 +26,15 @@ def get_seat_id(passes):
             for boarding_pass in passes]
 
 
-def get_missing_seat(all_seats):
-    return list(set(range(all_seats[0], all_seats[-1] + 1)) - set(all_seats))[0]
+def get_missing_seat(seats):
+    return list(set(range(min(seats), max(seats) + 1)) - set(seats))[0]
 
 
 if __name__ == '__main__':
     file_content = get_content('input')
     decoded_passes = decode_boarding_pass(file_content)
-    seat_ids = sorted(get_seat_id(decoded_passes))
-    highest_seat_id = seat_ids[-1]
+    seat_ids = get_seat_id(decoded_passes)
+    highest_seat_id = max(seat_ids)
     print(f'problem 1 - the solution is: {highest_seat_id}')
 
     missing_seat = get_missing_seat(seat_ids)
