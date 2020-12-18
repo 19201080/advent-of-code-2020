@@ -15,8 +15,8 @@ def base_operation(content, op):
     ops = {'+': lambda a, b: a + b,
            '*': lambda a, b: a * b}
     op_idx = [idx for idx, el in enumerate(content) if el == op][0]
-    res = ops[op](content[op_idx - 1], content[op_idx + 1])
-    return [*content[:op_idx - 1], res, *content[op_idx+2:]]
+    res = ops[op](content[op_idx-1], content[op_idx+1])
+    return [*content[:op_idx-1], res, *content[op_idx+2:]]
 
 
 def sequential_operations(content):
@@ -55,9 +55,9 @@ def process_content(content, mode=1):
 def main():
     file_content = get_content('input')
     result = process_content(file_content)
-    print(f'problem 1 - the solution is: {result} / {result == 18213007238947}')
+    print(f'problem 1 - the solution is: {result}')
     result = process_content(file_content, 2)
-    print(f'problem 2 - the solution is: {result} / {result == 388966573054664}')
+    print(f'problem 2 - the solution is: {result}')
 
 
 if __name__ == '__main__':
